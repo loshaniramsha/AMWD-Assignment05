@@ -103,7 +103,7 @@ function showQuestion(index) {
 function optionSelected(answer) {
     let userAns = answer.textContent;
     let correctAns = question[question_count].answer;
-    let allOptions = option_list.children.length;
+    const allOptions = document.querySelectorAll(".option");
 
     // Disable all options once one is selected
     allOptions.forEach(option => option.classList.add("disabled"));
@@ -116,16 +116,15 @@ function optionSelected(answer) {
         console.log("Answer is wrong");
 
         // If the selected answer is wrong, highlight the correct one
-      /*  allOptions.forEach(option => {
+        allOptions.forEach(option => {
             if (option.textContent == correctAns) {
                 option.classList.add("correct");
             }
-        });*/
-        for (let i=0;i<allOptions;i++){
-            option_list.children[i].classList.add("correct");
-        }
+        });
     }
 }
+
+
 
 
 

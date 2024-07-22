@@ -258,10 +258,13 @@ section .option-list .option:hover {
     background: #d4edda;
     border-color: #c3e6cb;
 }
-.option-list .option.wrong {
+.option-list .option.incorrect{
     color: #155724;
     background: #d4edda;
     border-color: #c3e6cb;
+}
+.option-list .option.incorrect{
+    pointer-events: none;
 }
 
 .quiz-box footer {
@@ -371,4 +374,21 @@ footer .next-btn:hover {
     border: 1px solid #007bff;
     cursor: pointer;
     transition: all 0.3s ease;
+}
+
+
+.option.correct {
+    color: #155724;
+    background: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.option.wrong {
+    color: #721c24;
+    background: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.option.disabled {
+    pointer-events: none;
 }
