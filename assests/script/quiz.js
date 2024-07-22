@@ -4,6 +4,7 @@ const exit_btn = info_box.querySelector(".buttons .quit");
 const continue_btn = info_box.querySelector(".buttons .restart");
 const quiz_box = document.querySelector(".quiz-box");
 const result_box = document.querySelector(".result-box");
+const timecount=quiz_box.querySelector(".timer.timer-sec");
 
 // When Start button is clicked
 start_btn.onclick = () => {
@@ -22,6 +23,7 @@ continue_btn.onclick = () => {
     quiz_box.classList.add("activeQuiz");
     showQuestion(0);
     queCounter(1);
+    starttime(10);
 }
 
 
@@ -51,9 +53,10 @@ quit_btn.onclick = () => {
     // Logic for quitting the quiz
 }
 
-let question_count = 1;
+let question_count = 0;
 let que_numb=1;
-
+let counter;
+let timeValue= 15;
 const next_btn=quiz_box.querySelector(".next-btn");
 
 next_btn.onclick = () => {
@@ -62,6 +65,8 @@ next_btn.onclick = () => {
         que_numb++;
         showQuestion(question_count);
         queCounter(que_numb);
+        clearInterval(counter);
+        starttime(15);
     } else {
         showResult();
     }
@@ -87,18 +92,9 @@ function showQuestion(index) {
     }
 }
 
-/*function optionSelected(answer){
-    let userAns=answer.textContent;
-    let correctAns=question[question_count].answer;
-    if (userAns == correctAns){
-        answer.classList.add("correct");
-        console.log("Answer is correct")
-    }else {
-        answer.classList.add("wrong");
-        console.log("Answer is wrong")
-    }
 
-}*/
+let tickIcon = '<div class="icon tick"><ion-icon name="checkbox-outline"></ion-icon></div>';
+let crossIcon = '<div class="icon cross"><ion-icon name="checkbox-outline"></ion-icon></div>';
 
 function optionSelected(answer) {
     let userAns = answer.textContent;
@@ -111,19 +107,36 @@ function optionSelected(answer) {
     if (userAns == correctAns) {
         answer.classList.add("correct");
         console.log("Answer is correct");
+        answer.insertAdjacentHTML("beforeend", tickIcon);
     } else {
         answer.classList.add("wrong");
         console.log("Answer is wrong");
+        answer.insertAdjacentHTML("beforeend", crossIcon);
 
         // If the selected answer is wrong, highlight the correct one
         allOptions.forEach(option => {
             if (option.textContent == correctAns) {
                 option.classList.add("correct");
+                option.insertAdjacentHTML("beforeend", tickIcon);
             }
         });
     }
 }
-
+function startTimer(){
+    counter = setInterval(timer, 1000);
+    function timer(){
+        timecount.textContent=time;
+        time--;
+        if (time<9){
+            let addZero=timecount.textContent;
+            timecount.textContent="0"+addZero;
+        }
+        if (time<=0){
+            clearInterval(counter);
+            timecount.textContent="00";
+        }
+    }
+}
 
 
 
