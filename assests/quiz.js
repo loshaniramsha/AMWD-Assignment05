@@ -87,6 +87,44 @@ function showQuestion(index) {
     }
 }
 
+/*function optionSelected(answer){
+    let userAns=answer.textContent;
+    let correctAns=question[question_count].answer;
+    if (userAns == correctAns){
+        answer.classList.add("correct");
+        console.log("Answer is correct")
+    }else {
+        answer.classList.add("wrong");
+        console.log("Answer is wrong")
+    }
+
+}*/
+
+function optionSelected(answer) {
+    let userAns = answer.textContent;
+    let correctAns = question[question_count].answer;
+    const allOptions = document.querySelectorAll(".option");
+
+    // Disable all options once one is selected
+    allOptions.forEach(option => option.classList.add("disabled"));
+
+    if (userAns == correctAns) {
+        answer.classList.add("correct");
+        console.log("Answer is correct");
+    } else {
+        answer.classList.add("wrong");
+        console.log("Answer is wrong");
+
+        // If the selected answer is wrong, highlight the correct one
+        allOptions.forEach(option => {
+            if (option.textContent == correctAns) {
+                option.classList.add("correct");
+            }
+        });
+    }
+}
+
+
 
 
 
